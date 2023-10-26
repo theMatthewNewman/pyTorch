@@ -3,6 +3,9 @@ import pandas as pd
 from torchvision.io import read_image
 from torch.utils.data import Dataset
 
+# a custom dataset class must impliment 3 functions.
+# __init__, __len__, and __getitem__
+
 class CustomImageDataset(Dataset):
     def __init__(self, annotations_file, img_dir, transform=None, target_transform=None):
         self.img_labels = pd.read_csv(annotations_file)
@@ -23,3 +26,5 @@ class CustomImageDataset(Dataset):
             label = self.target_transform(label)
         return image, label
 
+# in order to use this data we would have to first store our image files in directory
+# and labels in csv

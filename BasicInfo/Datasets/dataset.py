@@ -5,15 +5,15 @@ import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 
 training_data = datasets.FashionMNIST(
-    root="data",
-    train=True,
-    download=True,
-    transform=ToTensor()
+    root="data", # the path where the data is stored
+    train=True, # specifies that this is a train dataset
+    download=True, # if we don't currently have it download it from the internet.
+    transform=ToTensor() # feature and label transformations.
 )
 
 test_data = datasets.FashionMNIST(
     root="data",
-    train=False,
+    train=False, # not a dataset for training this is one for testing.
     download=True,
     transform=ToTensor()
 )
@@ -41,6 +41,12 @@ for i in range(1, cols * rows + 1):
     plt.axis("off")
     plt.imshow(img.squeeze(), cmap="gray")
 plt.show()
+
+# after generating our data.
+# the dataset retreaves our features and labels
+# one at a time, but when training
+# we want to pass samples in minibatches
+# Dataloader is an iterable that abstracts this complexity in an easy api
 
 train_dataloader = DataLoader(training_data, batch_size=64, shuffle=True)
 test_dataloader = DataLoader(test_data, batch_size=64, shuffle=True)
